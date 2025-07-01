@@ -15,6 +15,8 @@ function isAlreadyBooked(range, datesArr) {
 }
 
 function DateSelector() {
+
+  
   // Example state for range
   const [range, setRange] = useState({ from: undefined, to: undefined });
   // Example state for prices

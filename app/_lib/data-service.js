@@ -2,16 +2,12 @@ import { eachDayOfInterval } from "date-fns";
 import supabase from "./supabase";
 import { notFound } from "next/navigation";
 
-
-
 export async function getCabin(id) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
     .eq("id", id)
     .single();
-
-
 
   if (error) {
     console.error(error);
@@ -40,8 +36,6 @@ export const getCabins = async function () {
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
     .order("name");
-
-
 
   if (error) {
     console.error(error);
@@ -101,6 +95,8 @@ export async function getBookedDatesByCabinId(cabinId) {
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating a delay for testing purposes
+
   // Getting all bookings
   const { data, error } = await supabase
     .from("bookings")
@@ -128,7 +124,7 @@ export async function getBookedDatesByCabinId(cabinId) {
 
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
-
+  // await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulating a delay for testing purposes
   if (error) {
     console.error(error);
     throw new Error("Settings could not be loaded");

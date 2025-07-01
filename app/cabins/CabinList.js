@@ -1,21 +1,21 @@
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
-import { unstable_noStore as noStor } from "next/cache";
+export const revalidate = 60; // Enables ISR (SSG with revalidation)
 async function CabinList({ capacity = "all" }) {
-
   const cabins = await getCabins();
-  let displayCabins = cabins;
-if(capacity === "all") {
-  displayCabins = cabins;
-}
-if(capacity ==="small"){
-  displayCabins = cabins.filter((cabin) => cabin.maxCapacity <= 2);
-}
-if(capacity ==="medium"){
-  displayCabins = cabins.filter((cabin) => cabin.maxCapacity > 2 && cabin
-.maxCapacity <= 4);
 
-}
+  let displayCabins = cabins;
+  if (capacity === "all") {
+    displayCabins = cabins;
+  }
+  if (capacity === "small") {
+    displayCabins = cabins.filter((cabin) => cabin.maxCapacity <= 2);
+  }
+  if (capacity === "medium") {
+    displayCabins = cabins.filter(
+      (cabin) => cabin.maxCapacity > 2 && cabin.maxCapacity <= 4,
+    );
+  }
 
   return (
     <div>

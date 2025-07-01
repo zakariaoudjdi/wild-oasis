@@ -1,18 +1,16 @@
 import { Suspense } from "react";
 import CabinList from "./CabinList";
 import Filtter from "@/app/_components/Filtter";
-// export const revalidate = 60; 
+
+export const revalidate = 60; // Enables ISR (SSG with revalidation)
 
 export const metadata = {
   title: "Cabins | Wild Oasis",
   description: "Explore our beautiful cabins in the wilderness",
 };
 
-
-
-export default async function CabinsPage(props) {
-   const searchParams = await props.searchParams;
-  const capacity = searchParams?.capacity ?? "all";
+export default async function CabinsPage({ searchParams }) {
+  const capacity = await searchParams?.capacity ?? "all";
   return (
     <div>
       <h1 className="mb-5 text-4xl font-medium text-yellow-400">

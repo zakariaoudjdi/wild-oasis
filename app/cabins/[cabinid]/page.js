@@ -1,7 +1,12 @@
 import DateSelector from "@/app/_components/DateSelector";
 import ReservationForm from "@/app/_components/ReservationForm";
 import TextExpander from "@/app/_components/TextExpander";
-import { getCabin, getCabins } from "@/app/_lib/data-service";
+import {
+  getBookedDatesByCabinId,
+  getCabin,
+  getCabins,
+  getSettings,
+} from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
@@ -22,7 +27,8 @@ export const revalidate = 60; // Revalidate every 60 seconds
 export async function generateMetadata({ params }) {
   const { cabinid: cabinId } = await params;
   const cabin = await getCabin(cabinId);
-  
+  // const settings = await getSettings();
+  // const bookedDates = await getBookedDatesByCabinId(cabinId);
   return {
     title: `Cabin ${cabin.name} | The Wild Oasis`,
     description: cabin.description,
@@ -96,7 +102,7 @@ export default async function Page({ params }) {
           Reserve today. Pay on arrival.
         </h2>
       </div>
-      <div className="grid grid-cols-1 px-6 py-10 md:grid-cols-2 border mt-4 border-zinc-600">
+      <div className="mt-4 grid grid-cols-1 border border-zinc-600 px-6 py-10 md:grid-cols-2">
         <DateSelector />
         <ReservationForm />
       </div>
