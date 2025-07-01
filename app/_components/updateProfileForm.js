@@ -1,8 +1,7 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 function UpdateProfileForm({ children }) {
-
   const [country, setCountry] = useState("");
 
   return (
