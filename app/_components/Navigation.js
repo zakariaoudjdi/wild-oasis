@@ -4,7 +4,7 @@ import { se } from "date-fns/locale";
 export default async function Navigation() {
   // Check if the user is authenticated
   const session = await auth();
-  console.log("Session:", session);
+
   return (
     <nav className="bg z-10 text-xl">
       <ul className="flex items-center gap-16">
